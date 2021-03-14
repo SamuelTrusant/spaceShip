@@ -9,6 +9,10 @@ Este programa es una ampliación del programa del sistema solar https://github.c
 ## Funcionamiento
 En el programa puedes cambiar entre una vista del sistema solar y una vista en primera persona de la nave. La nave se ve quieta en la vista del sistema pero al entrar en primera persona puedes desplazarte hacia adelante, atrás y los lados con "wsad", y mover la orientación de la cámara con el ratón. Puedes volver a la vista del sistema con la tecla 'c' y puedes pausar el movimiento de los planetas con la tecla 'p'.
 
+## Vista del programa funcionando
+
+![](export.gif)
+
 ## Trabajo realizado
 El programa tiene lo mismo que la entrega anterior mas unos añadidos que setean la cámara en función de si es modo primera persona o no. Se ha creado la clase spaceShip la cual posee todos los parámetros de la nave y los métodos para moverse y rotar.
 

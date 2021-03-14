@@ -5,6 +5,8 @@ boolean modeHelp = true;
 
 SpaceShip spaceShip;
 
+float[] initialShipPos = {200,200,0};
+
 PShape space, earth, sun, venus, Mars, jupiter, moon, neptune, europe;
 
 PImage img, background;
@@ -37,7 +39,9 @@ float currentVenusSpeed, currentEarthSpeed, currentMoonSpeed, currentMarsSpeed, 
 void setup ( ) {
   size(1200 , 600 ,P3D) ;
   
-  spaceShip = new SpaceShip(100,100,0);
+  spaceShip = new SpaceShip(initialShipPos);
+  //spaceShip.spaceship = loadShape("Low Poly Spaceship.obj");
+
   
   background = loadImage("espacio4.jpg");
   //background(background);
@@ -113,26 +117,16 @@ void setup ( ) {
   europe.setTexture(img);
   endShape (CLOSE) ;
   
-  //spaceShip.spaceship = loadShape("Low Poly Spaceship.obj");
-
-  
   //gifExport = new GifMaker(this, "export.gif");
   //gifExport.setRepeat(0);
 }
 
 void draw ( ) {
   
-
-  textSize(20);
-  textAlign(LEFT);
-  text("'p' = pausar/reanudar el programa.\n'c' = cambiar vista a primera persona\n'w','s','a','d' = mover la nave", 10, 30);
   background.resize(width,height);
   background(0);
-  noCursor();
-  
-  //controles
-  //camera();   
-  
+
+  noCursor();  
 
   if(modeSpaceShip){
     //camera(0,0,0, spaceShip.view[0], 0, 0, 0, 1, 0);
@@ -159,23 +153,27 @@ void draw ( ) {
     */
     
     //beginCamera();
-      spaceShip.rotateCamera(-radians(spaceShip.rotY), radians(spaceShip.rotX));
       //spaceShip.rotateCamera(radians(1), radians(spaceShip.rotX));
+      //spaceShip.rotateCamera(-radians(spaceShip.rotY), radians(spaceShip.rotX));
+      spaceShip.rotateCamera(radians((mouseX - pmouseX)), radians((pmouseY - mouseY) * 0.5));
+
+      
 
       //spaceShip.rotateCamera(radians(mouseX - pmouseX), radians(pmouseY - mouseY));
       camera(spaceShip.pos[0], spaceShip.pos[1], spaceShip.pos[2], spaceShip.pos[0] + spaceShip.view[0], spaceShip.pos[1] + spaceShip.view[1], spaceShip.pos[2] + spaceShip.view[2], 0, 1, 0);
     //endCamera();
     
   } else {
+    textSize(20);
+    textAlign(LEFT);
+    text("'p' = pausar/reanudar el movimiento de los planetas.\n'c' = cambiar de vista\n'w','s','a','d' = mover la nave (en primera persona)\n'r' = resetear posición de la nave\nmover el ratón para rotar la cámara de la nave (primera persona)", 10, 30);
     camera();
     
   }
-  //nave
   
-
+  //nave
   pushMatrix();
   translate(spaceShip.pos[0], spaceShip.pos[1], spaceShip.pos[2]);
-  rotateZ(radians(spaceShip.rotX));
   rotateY(radians(spaceShip.rotY));
   shape(spaceShip.spaceship);
   popMatrix();
@@ -329,8 +327,8 @@ void moveSpaceShip(){
     if(spaceShip.a) spaceShip.moveSide(spaceShip.speed);
     if(spaceShip.d) spaceShip.moveSide(-spaceShip.speed);
   }
-  spaceShip.rotX = ((pmouseY - mouseY) * 0.5);
-  spaceShip.rotY = ((pmouseX - mouseX) );
+  spaceShip.rotX += ((pmouseY - mouseY) * 0.5);
+  spaceShip.rotY += ((pmouseX - mouseX) );
 
 }
 
@@ -362,7 +360,7 @@ void keyPressed(){
       spaceShip.d = true;
       break;
     case 'r':
-      spaceShip.resetSpaceShip();
+      spaceShip.resetSpaceShipPos(initialShipPos);
       break;
   }
 }

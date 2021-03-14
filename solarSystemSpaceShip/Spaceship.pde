@@ -15,10 +15,13 @@ public class SpaceShip {
   
   boolean w,s,a,d = false;
  
-  public SpaceShip(float x, float y, float z){
+  public SpaceShip(float[] initialPos){
+    resetSpaceShipPos(initialPos);
+    /*
     pos[0] = x;
     pos[1] = y;
     pos[2] = z;
+    */
     /*view[0] = x + 40;
     view[1] = y;
     view[2] = z;
@@ -27,11 +30,11 @@ public class SpaceShip {
     view[1] = 0;
     view[2] = 1;
     speed = 5;
-    
     beginShape ( ) ;
-    spaceship = createShape (BOX,10);
+    spaceship = createShape (SPHERE,10);
     spaceship.setStroke(255);
     endShape (CLOSE) ;
+    //spaceship = loadShape("LowPolySpaceship.obj");
   }
 
   public void moveX(float i){
@@ -73,11 +76,7 @@ public class SpaceShip {
           //newDir[m] = dir[n] * maskY[n][m];
           newSideDir[m] += sideDir[n] * maskY[n][m];
         }
-        print(sideDir[m] + ", ");
-        //print(newDir[m] + ", ");
-
       }
-      print("\n");
       
       dir = newDir;
       sideDir = newSideDir;
@@ -119,9 +118,9 @@ public class SpaceShip {
       view[1] -= angleX;
   }
   
-  public void resetSpaceShip(){
-    pos[0] = 100;
-    pos[1] = 100;
-    pos[2] = 0;
+  public void resetSpaceShipPos(float[] initialShipPos){
+    for(int i = 0; i < 3 ;i++){
+      pos[i] = initialShipPos[i];
+    }
   }
 }

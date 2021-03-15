@@ -21,3 +21,11 @@ La rotación de la cámara me ha dado muchos problemas, he probado de muchas for
 Durante el proceso de rotación guardamos el vector que indica la dirección a la que mira la cámara y aplicamos el desplazamiento en función de ella.
 
 Al principio el programa disponía la foto del espacio de fondo y eso causaba que al girar la cámara si perdías de vista el sistema solar no se notaba que estuviese rotando. Por ello intenté crear una esfera lo más grande posible y ponerle la textura del espacio, y meter el sistema solar dentro, así se nota más el efcto de rotación pero processing al dibujar una esfera tan grande, por alguna razón al dibujarla si te vas a un extremo de la esfera, el extremo opuesto desaparece, supongo que processing solo dibuja hasta una distancia limitada.
+
+## Referencias
+
+Guión de prácticas de CIU
+
+Referencias Processing https://processing.org/reference/
+
+Librería GifAnimation https://github.com/extrapixel/gif-animation
